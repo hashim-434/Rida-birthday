@@ -19,8 +19,8 @@
     }
     .container {
       width: 90%;
-      max-width: 500px;
-      background: rgba(255, 255, 255, 0.9);
+      max-width: 480px;
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(8px);
       padding: 25px;
       border-radius: 20px;
@@ -31,7 +31,7 @@
     }
     h1 {
       font-family: 'Dancing Script', cursive;
-      font-size: 2.8rem;
+      font-size: 2.5rem;
       color: #d63384;
       margin-bottom: 10px;
     }
@@ -40,7 +40,11 @@
     .active { display: block; }
     
     /* Lock Screen */
-    .gif-container img { width: 110px; height: auto; margin-bottom: 15px; }
+    .sticker-box {
+      font-size: 4rem;
+      margin-bottom: 10px;
+      user-select: none;
+    }
     .pin-display {
       width: 100%;
       height: 45px;
@@ -84,8 +88,8 @@
       transition: 0.2s;
     }
     .card-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-    .card-btn img { width: 45px; height: 45px; display: block; margin: 0 auto 8px; }
-    .card-btn span { font-size: 0.8rem; font-weight: 600; color: #d63384; }
+    .card-icon { font-size: 2.2rem; display: block; margin-bottom: 5px; }
+    .card-btn span { font-size: 0.85rem; font-weight: 600; color: #d63384; }
 
     /* Views */
     .letter-box {
@@ -100,8 +104,23 @@
       border: 1px dashed #ffb6c1;
       color: #333;
     }
-    .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .photo-grid img { width: 100%; height: 110px; object-fit: cover; border-radius: 10px; border: 2px solid #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    .flower-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #ffb6c1;
+      font-size: 3.5rem;
+      display: flex;
+      justify-content: space-around;
+    }
+    .music-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #ffb6c1;
+    }
+    .music-card audio { width: 100%; margin-top: 10px; }
+
     .back-btn {
       margin-top: 15px;
       background: #d63384;
@@ -129,20 +148,16 @@
 </head>
 <body>
 
-  <!-- Floating Decor -->
   <div class="floating" style="top: 10%; left: 5%;">🧸</div>
   <div class="floating" style="top: 20%; right: 5%; animation-delay: 1s;">🌸</div>
   <div class="floating" style="bottom: 10%; left: 8%; animation-delay: 2s;">💖</div>
 
   <div class="container">
     
-    <!-- Lock Screen -->
     <div id="screen-lock" class="screen active">
       <h1>Happy Birthday Rida! 💖</h1>
       <p>Enter your birthday date (0509) to unlock!</p>
-      <div class="gif-container">
-        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧸</text></svg>" alt="Cute Bear">
-      </div>
+      <div class="sticker-box">🧸❤️</div>
       <div id="pin-display" class="pin-display">____</div>
       <div class="keypad">
         <button onclick="pressKey('1')">1</button>
@@ -160,38 +175,35 @@
       </div>
     </div>
 
-    <!-- Main Dashboard -->
     <div id="screen-dashboard" class="screen">
       <h1>For My Favorite Person 🧸</h1>
       <p>Click on the cards below, Riri!</p>
       <div class="menu-grid">
         <div class="card-btn" onclick="showScreen('screen-flowers')">
-          <img src="https://img.icons8.com/emoji/96/bouquet-emoji.png" alt="Flowers">
+          <span class="card-icon">💐</span>
           <span>Flowers</span>
         </div>
         <div class="card-btn" onclick="showScreen('screen-letter')">
-          <img src="https://img.icons8.com/emoji/96/love-letter-emoji.png" alt="Letter">
+          <span class="card-icon">💌</span>
           <span>Letter</span>
         </div>
         <div class="card-btn" onclick="showScreen('screen-music')">
-          <img src="https://img.icons8.com/emoji/96/teddy-bear-emoji.png" alt="Song">
+          <span class="card-icon">🎵</span>
           <span>Song</span>
         </div>
       </div>
     </div>
 
-    <!-- Flowers View -->
     <div id="screen-flowers" class="screen">
       <h1>Flowers For You 🌸</h1>
-      <div class="photo-grid">
-        <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=400&q=80" alt="White Lilies">
-        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80" alt="Pink Roses">
-        <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=400&q=80" alt="Lilies and Roses">
+      <div class="flower-box">
+        <span>🌸</span>
+        <span>🌹</span>
+        <span>🌺</span>
       </div>
       <button class="back-btn" onclick="showScreen('screen-dashboard')">Back</button>
     </div>
 
-    <!-- Letter View -->
     <div id="screen-letter" class="screen">
       <h1>My Birthday Letter 💌</h1>
       <div class="letter-box">
@@ -202,11 +214,16 @@
       <button class="back-btn" onclick="showScreen('screen-dashboard')">Back</button>
     </div>
 
-    <!-- Music View -->
     <div id="screen-music" class="screen">
       <h1>A Song For You 🎵</h1>
       <p>Press play to listen!</p>
-      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/0T5iIrBpyA1A31A13R8O2I?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div class="music-card">
+        <p style="font-weight: 600; color: #d63384; margin-bottom: 5px;">Until I Found You - Stephen Sanchez</p>
+        <audio controls>
+          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
       <button class="back-btn" onclick="showScreen('screen-dashboard')">Back</button>
     </div>
 
