@@ -20,7 +20,7 @@
     .container {
       width: 90%;
       max-width: 500px;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(8px);
       padding: 25px;
       border-radius: 20px;
@@ -40,7 +40,7 @@
     .active { display: block; }
     
     /* Lock Screen */
-    .gif-container img { width: 150px; height: auto; margin-bottom: 15px; }
+    .gif-container img { width: 150px; height: auto; margin-bottom: 15px; border-radius: 12px; }
     .pin-display {
       width: 100%;
       height: 45px;
@@ -91,16 +91,17 @@
     .letter-box {
       text-align: left;
       background: #fff;
-      padding: 15px;
-      border-radius: 10px;
-      max-height: 250px;
+      padding: 18px;
+      border-radius: 12px;
+      max-height: 260px;
       overflow-y: auto;
-      font-size: 0.9rem;
-      line-height: 1.5;
+      font-size: 0.92rem;
+      line-height: 1.6;
       border: 1px dashed #ffb6c1;
+      color: #333;
     }
     .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .photo-grid img { width: 100%; border-radius: 8px; border: 2px solid #fff; }
+    .photo-grid img { width: 100%; height: 110px; object-fit: cover; border-radius: 10px; border: 2px solid #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
     .back-btn {
       margin-top: 15px;
       background: #d63384;
@@ -109,6 +110,7 @@
       padding: 8px 18px;
       border-radius: 20px;
       cursor: pointer;
+      font-weight: 600;
     }
 
     /* Floating Decor */
@@ -117,6 +119,7 @@
       pointer-events: none;
       animation: float 6s ease-in-out infinite;
       z-index: 1;
+      font-size: 1.5rem;
     }
     @keyframes float {
       0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -181,9 +184,9 @@
     <div id="screen-flowers" class="screen">
       <h1>Flowers For You 🌸</h1>
       <div class="photo-grid">
-        <img src="https://via.placeholder.com/100/ffb6c1/ffffff?text=🌸" alt="Flowers">
-        <img src="https://via.placeholder.com/100/ffb6c1/ffffff?text=🌺" alt="Flowers">
-        <img src="https://via.placeholder.com/100/ffb6c1/ffffff?text=🌹" alt="Flowers">
+        <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=400&q=80" alt="White Lilies">
+        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80" alt="Pink Roses">
+        <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=400&q=80" alt="Lilies and Roses">
       </div>
       <button class="back-btn" onclick="showScreen('screen-dashboard')">Back</button>
     </div>
@@ -193,7 +196,8 @@
       <h1>My Birthday Letter 💌</h1>
       <div class="letter-box">
         Happy Birthday Rida! 🎉<br><br>
-        Happy Birthday to the most amazing person in my world! Even with all the distance between us, you make every day brighter and warmer. I hope this year brings you as much happiness as you give to me. Enjoy your special day, my love! ❤️
+        Happy Birthday to the most special person in my life! Even with all the distance between us, you bring so much warmth, comfort, and joy into my world every single day.<br><br>
+        I hope this year brings you as much happiness as you give to everyone around you. Keep smiling, stay as wonderful as you are, and enjoy your special day to the absolute fullest! ❤️
       </div>
       <button class="back-btn" onclick="showScreen('screen-dashboard')">Back</button>
     </div>
@@ -202,7 +206,7 @@
     <div id="screen-music" class="screen">
       <h1>A Song For You 🎵</h1>
       <p>Press play to listen!</p>
-      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4cOdK2wGLETKBW3PvgPWqT?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/0T5iIrBpyA1A31A13R8O2I?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       <button class="back-btn" onclick="showScreen('screen-dashboard')">Back</button>
     </div>
 
@@ -210,7 +214,7 @@
 
   <script>
     let inputPin = "";
-    const correctPin = "0509"; // Passcode set to 5th September
+    const correctPin = "0509"; // Set to 5th September
 
     function pressKey(num) {
       if (inputPin.length < 4) {
