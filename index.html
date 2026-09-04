@@ -21,8 +21,7 @@
     .container {
       width: 90%;
       max-width: 480px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(8px);
+      background: #ffffff;
       padding: 25px;
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(238, 156, 167, 0.4);
@@ -37,8 +36,9 @@
       margin-bottom: 10px;
     }
     p { margin-bottom: 15px; font-size: 0.95rem; }
+    
     .screen { display: none; }
-    .active { display: block !important; }
+    .screen.active { display: block !important; }
     
     .sticker-container {
       font-size: 4rem;
@@ -182,7 +182,7 @@
 <body>
 
   <!-- Background Audio Element -->
-  <audio id="bg-music" loop preload="auto">
+  <audio id="bg-music" loop preload="none">
     <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-piano-112199.mp3" type="audio/mpeg">
   </audio>
 
@@ -254,7 +254,7 @@
       <button class="back-btn" onclick="showScreen('screen-dashboard')">Back</button>
     </div>
 
-    <!-- Customized Story Timeline View -->
+    <!-- Story Timeline View -->
     <div id="screen-timeline" class="screen">
       <h1>Our Moments 📖</h1>
       <div class="timeline">
@@ -310,25 +310,18 @@
   </div>
 
   <script>
-    let inputPin = "";
-    const correctPin = "0509";
-    const audio = document.getElementById('bg-music');
-    let hasPlayed = false;
-
-    const reasons = [
-      "Your smile can make my worst days feel instantly better. 💖",
-      "You always know how to comfort me when I need it most. 🧸",
-      "The way you care about the little things is so cute. ✨",
-      "Your laugh is my absolute favorite sound in the world. 🎵",
-      "You make long distance feel effortless and worth every second. 🌍",
-      "Just thinking about you makes me smile randomly. 😊"
-    ];
+    var inputPin = "";
+    var correctPin = "0509";
+    var hasPlayed = false;
 
     function safePlayMusic() {
       if (!hasPlayed) {
-        audio.play().then(() => {
-          hasPlayed = true;
-        }).catch(err => {});
+        var audio = document.getElementById('bg-music');
+        if (audio) {
+          audio.play().then(function() {
+            hasPlayed = true;
+          }).catch(function(e) {});
+        }
       }
     }
 
@@ -360,12 +353,26 @@
     }
 
     function showScreen(screenId) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.getElementById(screenId).classList.add('active');
+      var screens = document.querySelectorAll('.screen');
+      for (var i = 0; i < screens.length; i++) {
+        screens[i].classList.remove('active');
+      }
+      var target = document.getElementById(screenId);
+      if (target) {
+        target.classList.add('active');
+      }
     }
 
     function generateReason() {
-      const randomIndex = Math.floor(Math.random() * reasons.length);
+      var reasons = [
+        "Your smile can make my worst days feel instantly better. 💖",
+        "You always know how to comfort me when I need it most. 🧸",
+        "The way you care about the little things is so cute. ✨",
+        "Your laugh is my absolute favorite sound in the world. 🎵",
+        "You make long distance feel effortless and worth every second. 🌍",
+        "Just thinking about you makes me smile randomly. 😊"
+      ];
+      var randomIndex = Math.floor(Math.random() * reasons.length);
       document.getElementById('reason-display').innerText = reasons[randomIndex];
     }
 
