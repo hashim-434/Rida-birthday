@@ -39,7 +39,7 @@
     .screen { display: none; }
     .active { display: block; }
     
-    /* Screen 1: Lock Screen */
+    /* Lock Screen */
     .gif-container img { width: 150px; height: auto; margin-bottom: 15px; }
     .pin-display {
       width: 100%;
@@ -73,7 +73,7 @@
     }
     .keypad button:active { transform: scale(0.95); background: #d63384; }
 
-    /* Screen 2: Dashboard */
+    /* Dashboard */
     .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
     .card-btn {
       background: #fff;
@@ -87,7 +87,7 @@
     .card-btn img { width: 45px; height: 45px; display: block; margin: 0 auto 8px; }
     .card-btn span { font-size: 0.8rem; font-weight: 600; color: #d63384; }
 
-    /* Detail Views */
+    /* Views */
     .letter-box {
       text-align: left;
       background: #fff;
@@ -126,17 +126,17 @@
 </head>
 <body>
 
-  <!-- Floating Decor Elements -->
+  <!-- Floating Decor -->
   <div class="floating" style="top: 10%; left: 5%;">🧸</div>
   <div class="floating" style="top: 20%; right: 5%; animation-delay: 1s;">🌸</div>
   <div class="floating" style="bottom: 10%; left: 8%; animation-delay: 2s;">💖</div>
 
   <div class="container">
     
-    <!-- STEP 1: Passcode Screen -->
+    <!-- Lock Screen -->
     <div id="screen-lock" class="screen active">
       <h1>Happy Birthday Rida! 💖</h1>
-      <p>Enter our special date to unlock your surprise!</p>
+      <p>Enter your birthday date (0509) to unlock!</p>
       <div class="gif-container">
         <img src="https://media.tenor.com/gU86WXYINSTAAAAi/dudu-bubu-gif.gif" alt="Dudu Bubu">
       </div>
@@ -157,10 +157,10 @@
       </div>
     </div>
 
-    <!-- STEP 2: Main Dashboard -->
+    <!-- Main Dashboard -->
     <div id="screen-dashboard" class="screen">
       <h1>For My Favorite Person 🧸</h1>
-      <p>Click on the cards below, Rida!</p>
+      <p>Click on the cards below, Riri!</p>
       <div class="menu-grid">
         <div class="card-btn" onclick="showScreen('screen-flowers')">
           <img src="https://img.icons8.com/emoji/96/bouquet-emoji.png" alt="Flowers">
@@ -193,7 +193,7 @@
       <h1>My Birthday Letter 💌</h1>
       <div class="letter-box">
         Happy Birthday Rida! 🎉<br><br>
-        I hope your day is as bright, cute, and wonderful as you are. Thank you for always bringing so much joy into my life. Enjoy your special day!
+        Happy Birthday to the most amazing person in my world! Even with all the distance between us, you make every day brighter and warmer. I hope this year brings you as much happiness as you give to me. Enjoy your special day, my love! ❤️
       </div>
       <button class="back-btn" onclick="showScreen('screen-dashboard')">Back</button>
     </div>
@@ -210,7 +210,7 @@
 
   <script>
     let inputPin = "";
-    const correctPin = "0123"; // Change this to your target passcode date!
+    const correctPin = "0509"; // Passcode set to 5th September
 
     function pressKey(num) {
       if (inputPin.length < 4) {
