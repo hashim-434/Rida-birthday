@@ -39,7 +39,6 @@
     .screen { display: none; }
     .active { display: block; }
     
-    /* Lock Screen Header Sticker */
     .sticker-container {
       font-size: 4rem;
       margin: 10px 0 15px 0;
@@ -79,18 +78,18 @@
     .keypad button:active { transform: scale(0.95); background: #d63384; }
 
     /* Dashboard */
-    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
+    .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px; }
     .card-btn {
       background: #fff;
       border: 2px solid #ffb6c1;
       border-radius: 12px;
-      padding: 15px 5px;
+      padding: 20px 10px;
       cursor: pointer;
       transition: 0.2s;
     }
     .card-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-    .card-icon { font-size: 2.2rem; display: block; margin-bottom: 5px; }
-    .card-btn span { font-size: 0.85rem; font-weight: 600; color: #d63384; }
+    .card-icon { font-size: 2.5rem; display: block; margin-bottom: 5px; }
+    .card-btn span { font-size: 0.9rem; font-weight: 600; color: #d63384; }
 
     /* Views */
     .letter-box {
@@ -114,13 +113,6 @@
       display: flex;
       justify-content: space-around;
     }
-    .music-card {
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      border: 1px solid #ffb6c1;
-    }
-    .music-card audio { width: 100%; margin-top: 10px; }
 
     .back-btn {
       margin-top: 15px;
@@ -133,7 +125,7 @@
       font-weight: 600;
     }
 
-    /* Floating Background Elements */
+    /* Floating Decor */
     .floating {
       position: absolute;
       pointer-events: none;
@@ -147,5 +139,120 @@
     }
   </style>
 </head>
-<body>
-  
+<body onclick="startContinuousMusic()">
+
+  <audio id="bg-music" loop playsinline preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-piano-112199.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="floating" style="top: 10%; left: 5%;">🧸</div>
+  <div class="floating" style="top: 20%; right: 5%; animation-delay: 1s;">🌸</div>
+  <div class="floating" style="bottom: 10%; left: 8%; animation-delay: 2s;">💖</div>
+
+  <div class="container">
+    
+    <div id="screen-lock" class="screen active">
+      <h1>Happy Birthday Rida! 💖</h1>
+      <p>Enter your birthday date (0509) to unlock!</p>
+      <div class="sticker-container">🧸❤️</div>
+      <div id="pin-display" class="pin-display">____</div>
+      <div class="keypad">
+        <button onclick="pressKey('1')">1</button>
+        <button onclick="pressKey('2')">2</button>
+        <button onclick="pressKey('3')">3</button>
+        <button onclick="pressKey('4')">4</button>
+        <button onclick="pressKey('5')">5</button>
+        <button onclick="pressKey('6')">6</button>
+        <button onclick="pressKey('7')">7</button>
+        <button onclick="pressKey('8')">8</button>
+        <button onclick="pressKey('9')">9</button>
+        <button onclick="clearPin()">C</button>
+        <button onclick="pressKey('0')">0</button>
+        <button onclick="checkPin()">></button>
+      </div>
+    </div>
+
+    <div id="screen-dashboard" class="screen">
+      <h1>For My Favorite Person 🧸</h1>
+      <p>Click on the cards below, Riri!</p>
+      <div class="menu-grid">
+        <div class="card-btn" onclick="showScreen('screen-flowers')">
+          <span class="card-icon">💐</span>
+          <span>Flowers</span>
+        </div>
+        <div class="card-btn" onclick="showScreen('screen-letter')">
+          <span class="card-icon">💌</span>
+          <span>Letter</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="screen-flowers" class="screen">
+      <h1>Flowers For You 🌸</h1>
+      <div class="flower-box">
+        <span>🌸</span>
+        <span>🌹</span>
+        <span>🌺</span>
+      </div>
+      <button class="back-btn" onclick="showScreen('screen-dashboard')">Back</button>
+    </div>
+
+    <div id="screen-letter" class="screen">
+      <h1>My Birthday Letter 💌</h1>
+      <div class="letter-box">
+        Happy Birthday Rida! 🎉<br><br>
+        Happy Birthday to the most special person in my life! Even with all the distance between us, you bring so much warmth, comfort, and joy into my world every single day.<br><br>
+        I hope this year brings you as much happiness as you give to everyone around you. Keep smiling, stay as wonderful as you are, and enjoy your special day to the absolute fullest! ❤️
+      </div>
+      <button class="back-btn" onclick="showScreen('screen-dashboard')">Back</button>
+    </div>
+
+  </div>
+
+  <script>
+    let inputPin = "";
+    const correctPin = "0509";
+    const audio = document.getElementById('bg-music');
+    let musicStarted = false;
+
+    function startContinuousMusic() {
+      if (!musicStarted) {
+        audio.play().then(() => {
+          musicStarted = true;
+        }).catch(() => {});
+      }
+    }
+
+    function pressKey(num) {
+      startContinuousMusic();
+      if (inputPin.length < 4) {
+        inputPin += num;
+        updateDisplay();
+      }
+    }
+
+    function clearPin() {
+      inputPin = "";
+      updateDisplay();
+    }
+
+    function updateDisplay() {
+      document.getElementById('pin-display').innerText = inputPin.padEnd(4, '_');
+    }
+
+    function checkPin() {
+      if (inputPin === correctPin) {
+        showScreen('screen-dashboard');
+      } else {
+        alert("Wrong passcode! Try again ❤️");
+        clearPin();
+      }
+    }
+
+    function showScreen(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(screenId).classList.add('active');
+    }
+  </script>
+</body>
+</html>
