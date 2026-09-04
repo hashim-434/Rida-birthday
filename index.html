@@ -129,5 +129,122 @@
 </head>
 <body>
 
+  <!-- Floating Decor -->
   <div class="floating" style="top: 10%; left: 5%;">🧸</div>
-  <div class="floating" style="top: 2
+  <div class="floating" style="top: 20%; right: 5%; animation-delay: 1s;">🌸</div>
+  <div class="floating" style="bottom: 10%; left: 8%; animation-delay: 2s;">💖</div>
+
+  <div class="container">
+    
+    <!-- Lock Screen -->
+    <div id="screen-lock" class="screen active">
+      <h1>Happy Birthday Rida! 💖</h1>
+      <p>Enter your birthday date (0509) to unlock!</p>
+      <div class="gif-container">
+        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧸</text></svg>" alt="Cute Bear">
+      </div>
+      <div id="pin-display" class="pin-display">____</div>
+      <div class="keypad">
+        <button onclick="pressKey('1')">1</button>
+        <button onclick="pressKey('2')">2</button>
+        <button onclick="pressKey('3')">3</button>
+        <button onclick="pressKey('4')">4</button>
+        <button onclick="pressKey('5')">5</button>
+        <button onclick="pressKey('6')">6</button>
+        <button onclick="pressKey('7')">7</button>
+        <button onclick="pressKey('8')">8</button>
+        <button onclick="pressKey('9')">9</button>
+        <button onclick="clearPin()">C</button>
+        <button onclick="pressKey('0')">0</button>
+        <button onclick="checkPin()">></button>
+      </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="screen-dashboard" class="screen">
+      <h1>For My Favorite Person 🧸</h1>
+      <p>Click on the cards below, Riri!</p>
+      <div class="menu-grid">
+        <div class="card-btn" onclick="showScreen('screen-flowers')">
+          <img src="https://img.icons8.com/emoji/96/bouquet-emoji.png" alt="Flowers">
+          <span>Flowers</span>
+        </div>
+        <div class="card-btn" onclick="showScreen('screen-letter')">
+          <img src="https://img.icons8.com/emoji/96/love-letter-emoji.png" alt="Letter">
+          <span>Letter</span>
+        </div>
+        <div class="card-btn" onclick="showScreen('screen-music')">
+          <img src="https://img.icons8.com/emoji/96/teddy-bear-emoji.png" alt="Song">
+          <span>Song</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flowers View -->
+    <div id="screen-flowers" class="screen">
+      <h1>Flowers For You 🌸</h1>
+      <div class="photo-grid">
+        <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=400&q=80" alt="White Lilies">
+        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80" alt="Pink Roses">
+        <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=400&q=80" alt="Lilies and Roses">
+      </div>
+      <button class="back-btn" onclick="showScreen('screen-dashboard')">Back</button>
+    </div>
+
+    <!-- Letter View -->
+    <div id="screen-letter" class="screen">
+      <h1>My Birthday Letter 💌</h1>
+      <div class="letter-box">
+        Happy Birthday Rida! 🎉<br><br>
+        Happy Birthday to the most special person in my life! Even with all the distance between us, you bring so much warmth, comfort, and joy into my world every single day.<br><br>
+        I hope this year brings you as much happiness as you give to everyone around you. Keep smiling, stay as wonderful as you are, and enjoy your special day to the absolute fullest! ❤️
+      </div>
+      <button class="back-btn" onclick="showScreen('screen-dashboard')">Back</button>
+    </div>
+
+    <!-- Music View -->
+    <div id="screen-music" class="screen">
+      <h1>A Song For You 🎵</h1>
+      <p>Press play to listen!</p>
+      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/0T5iIrBpyA1A31A13R8O2I?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <button class="back-btn" onclick="showScreen('screen-dashboard')">Back</button>
+    </div>
+
+  </div>
+
+  <script>
+    let inputPin = "";
+    const correctPin = "0509";
+
+    function pressKey(num) {
+      if (inputPin.length < 4) {
+        inputPin += num;
+        updateDisplay();
+      }
+    }
+
+    function clearPin() {
+      inputPin = "";
+      updateDisplay();
+    }
+
+    function updateDisplay() {
+      document.getElementById('pin-display').innerText = inputPin.padEnd(4, '_');
+    }
+
+    function checkPin() {
+      if (inputPin === correctPin) {
+        showScreen('screen-dashboard');
+      } else {
+        alert("Wrong passcode! Try again ❤️");
+        clearPin();
+      }
+    }
+
+    function showScreen(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(screenId).classList.add('active');
+    }
+  </script>
+</body>
+</html>
